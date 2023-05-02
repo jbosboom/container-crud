@@ -28,31 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridView1 = new DataGridView();
+            gridCtrl = new DataGridView();
             urlBox = new TextBox();
             label1 = new Label();
             connectBtn = new Button();
             saveBtn = new Button();
-            discardBtn = new Button();
-            newBtn = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            refreshBtn = new Button();
+            ((System.ComponentModel.ISupportInitialize)gridCtrl).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // gridCtrl
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 12);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(776, 397);
-            dataGridView1.TabIndex = 0;
+            gridCtrl.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gridCtrl.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            gridCtrl.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridCtrl.Enabled = false;
+            gridCtrl.Location = new Point(12, 12);
+            gridCtrl.Name = "gridCtrl";
+            gridCtrl.RowTemplate.Height = 25;
+            gridCtrl.Size = new Size(776, 397);
+            gridCtrl.TabIndex = 0;
+            gridCtrl.CellValidated += gridCtrl_CellValidated;
+            gridCtrl.CellValueChanged += gridCtrl_CellValueChanged;
+            gridCtrl.DataError += gridCtrl_DataError;
+            gridCtrl.DefaultValuesNeeded += gridCtrl_DefaultValuesNeeded;
+            gridCtrl.RowValidated += gridCtrl_RowValidated;
+            gridCtrl.UserDeletingRow += gridCtrl_UserDeletingRow;
             // 
             // urlBox
             // 
             urlBox.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             urlBox.Location = new Point(94, 415);
             urlBox.Name = "urlBox";
+            urlBox.PlaceholderText = "http://localhost:5289";
             urlBox.Size = new Size(310, 23);
             urlBox.TabIndex = 1;
             // 
@@ -75,64 +83,57 @@
             connectBtn.TabIndex = 3;
             connectBtn.Text = "Connect";
             connectBtn.UseVisualStyleBackColor = true;
+            connectBtn.Click += connectBtn_Click;
             // 
             // saveBtn
             // 
             saveBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            saveBtn.Enabled = false;
             saveBtn.Location = new Point(700, 415);
             saveBtn.Name = "saveBtn";
             saveBtn.Size = new Size(88, 23);
             saveBtn.TabIndex = 4;
             saveBtn.Text = "Save";
             saveBtn.UseVisualStyleBackColor = true;
+            saveBtn.Click += saveBtn_Click;
             // 
-            // discardBtn
+            // refreshBtn
             // 
-            discardBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            discardBtn.Location = new Point(606, 415);
-            discardBtn.Name = "discardBtn";
-            discardBtn.Size = new Size(88, 23);
-            discardBtn.TabIndex = 5;
-            discardBtn.Text = "Discard";
-            discardBtn.UseVisualStyleBackColor = true;
+            refreshBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            refreshBtn.Enabled = false;
+            refreshBtn.Location = new Point(606, 415);
+            refreshBtn.Name = "refreshBtn";
+            refreshBtn.Size = new Size(88, 23);
+            refreshBtn.TabIndex = 5;
+            refreshBtn.Text = "Refresh";
+            refreshBtn.UseVisualStyleBackColor = true;
+            refreshBtn.Click += refreshBtn_Click;
             // 
-            // newBtn
-            // 
-            newBtn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            newBtn.Location = new Point(512, 415);
-            newBtn.Name = "newBtn";
-            newBtn.Size = new Size(88, 23);
-            newBtn.TabIndex = 6;
-            newBtn.Text = "New Item";
-            newBtn.UseVisualStyleBackColor = true;
-            // 
-            // Form1
+            // ContainerCrudForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(newBtn);
-            Controls.Add(discardBtn);
+            Controls.Add(refreshBtn);
             Controls.Add(saveBtn);
             Controls.Add(connectBtn);
             Controls.Add(label1);
             Controls.Add(urlBox);
-            Controls.Add(dataGridView1);
-            Name = "Form1";
-            Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Controls.Add(gridCtrl);
+            Name = "ContainerCrudForm";
+            Text = "Container CRUD Client";
+            ((System.ComponentModel.ISupportInitialize)gridCtrl).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridView1;
+        private DataGridView gridCtrl;
         private TextBox urlBox;
         private Label label1;
         private Button connectBtn;
         private Button saveBtn;
-        private Button discardBtn;
-        private Button newBtn;
+        private Button refreshBtn;
     }
 }
