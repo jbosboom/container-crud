@@ -96,8 +96,12 @@ namespace ContainerCrudClient
 
         private void gridCtrl_DataError(object? sender, DataGridViewDataErrorEventArgs e)
         {
-            gridCtrl.Rows[e.RowIndex].ErrorText = "data validation error";
-            gridCtrl.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "data validation error";
+            if (e.RowIndex >= 0 && e.RowIndex < gridCtrl.RowCount)
+            {
+                gridCtrl.Rows[e.RowIndex].ErrorText = "data validation error";
+                if (e.ColumnIndex >= 0 && e.ColumnIndex < gridCtrl.ColumnCount)
+                    gridCtrl.Rows[e.RowIndex].Cells[e.ColumnIndex].ErrorText = "data validation error";
+            }
             e.ThrowException = false;
         }
 
